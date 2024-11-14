@@ -1,22 +1,30 @@
-import {
-  createStaticNavigation,
-  NavigationContainer,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen";
 import ProductDetailScreen from "../screens/ProductDetailScreen";
 
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Home: HomeScreen,
-    Product: ProductDetailScreen,
-  },
-});
+export type RootStackParamList = {
+  Home: undefined;
+  Product: { productId: string };
+};
 
-const Navigation = createStaticNavigation(RootStack);
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
-  return <Navigation />;
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerStyle: { backgroundColor: "#2e003e" },
+          headerTintColor: "white",
+        }}
+      >
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Product" component={ProductDetailScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 };
 
 export default RootNavigator;
