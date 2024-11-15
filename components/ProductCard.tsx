@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { Product } from "../utils/types";
+import { Surface } from "react-native-paper";
 
 type Props = {
   product: Product;
@@ -9,15 +10,14 @@ type Props = {
 const ProductCard = (props: Props) => {
   return (
     <Pressable onPress={props.onPress}>
-      <View style={styles.container}>
+      <Surface style={styles.container} elevation={4}>
         <Image
           style={styles.image}
           source={require("../assets/productimg.png")}
         />
         <Text style={styles.title}>{props.product.name}</Text>
-        <Text style={styles.text}>{props.product.description}</Text>
         <Text style={styles.text}>${props.product.price}</Text>
-      </View>
+      </Surface>
     </Pressable>
   );
 };
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#e4dcf1",
     padding: 2,
     alignItems: "center",
+    borderRadius: 5,
   },
   image: {
     width: 100,
