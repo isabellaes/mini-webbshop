@@ -53,13 +53,9 @@ const cartSlice = createSlice({
       );
 
       if (existingItem) {
-        if (existingItem.quantity > 1) {
-          existingItem.quantity -= 1;
-        } else {
-          state.items = state.items.filter(
-            (item) => item.product.id !== action.payload.productId
-          );
-        }
+        state.items = state.items.filter(
+          (item) => item.product.id !== action.payload.productId
+        );
       }
     },
     clearCart(state) {
