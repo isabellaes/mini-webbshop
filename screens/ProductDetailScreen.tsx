@@ -20,7 +20,7 @@ const ProductDetailScreen = (props: Props) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const addToCart = () => {
-    dispatch(addItem({ product, quantity: 1 }));
+    if (product) dispatch(addItem({ product, quantity: 1 }));
   };
 
   return (
