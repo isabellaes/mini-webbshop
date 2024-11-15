@@ -1,9 +1,10 @@
 import { View, FlatList, StyleSheet } from "react-native";
 import ProductCard from "../components/ProductCard";
-import { products } from "../utils/data";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/RootNavigator";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -12,6 +13,7 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<
 
 const HomeScreen = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
+  const products = useSelector((state: RootState) => state.product.items);
 
   return (
     <View style={styles.container}>
