@@ -31,15 +31,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
-    backgroundColor: "#e4dcf1",
-    padding: 2,
+    backgroundColor: "white",
     alignItems: "center",
-    borderRadius: 5,
   },
   image: {
-    width: 100,
-    height: 100,
-    margin: 2,
+    width: 197,
+    height: 197,
   },
   title: {
     fontWeight: "bold",

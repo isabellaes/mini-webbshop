@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, Image, Button } from "react-native";
 import { RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "../navigation/RootNavigator";
-import { Surface } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../store/store";
 import { addItem } from "../store/cartSlice";
@@ -26,20 +25,18 @@ const ProductDetailScreen = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <Surface elevation={4} style={styles2.container}>
-        <Image
-          style={styles2.image}
-          source={
-            product
-              ? imageMap[product.img]
-              : require("../assets/productimg.png")
-          }
-        />
-        <Text style={styles2.title}>{product?.name}</Text>
-        <Text style={styles2.text}>{product?.description}</Text>
-        <Text style={styles2.text}>${product?.price}</Text>
-        <Button onPress={addToCart} title="Add to cart" color={"#3d2352"} />
-      </Surface>
+      <Image
+        style={styles2.image}
+        source={
+          product ? imageMap[product.img] : require("../assets/productimg.png")
+        }
+      />
+      <Text style={styles2.title}>{product?.name}</Text>
+      <Text style={styles2.text}>{product?.description}</Text>
+      <Text style={styles2.text}>Size: {product?.size}</Text>
+      <Text style={styles2.text}>Tags: {product?.tags}</Text>
+      <Text style={styles2.text}>${product?.price}</Text>
+      <Button onPress={addToCart} title="Add to cart" color={"#3d2352"} />
     </View>
   );
 };
@@ -49,25 +46,23 @@ export default ProductDetailScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#8874a3",
+    backgroundColor: "white",
     alignItems: "center",
   },
 });
 
 const styles2 = StyleSheet.create({
   container: {
-    width: "95%",
-    height: "50%",
-    backgroundColor: "#e4dcf1",
+    width: "100%",
+    backgroundColor: "white",
     padding: 2,
     alignItems: "center",
     justifyContent: "space-evenly",
     marginTop: 10,
-    borderRadius: 5,
   },
   image: {
-    width: 250,
-    height: 250,
+    width: 400,
+    height: 400,
     margin: 2,
   },
   title: {

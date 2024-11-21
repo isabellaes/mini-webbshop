@@ -49,44 +49,54 @@ const CartScreen = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      {items.map((item) => (
-        <View style={styles.cartItem} key={item.product._id}>
-          <Image
-            style={styles2.image}
-            source={
-              imageMap[item.product.img] || require("../assets/productimg.png")
-            }
-          ></Image>
-          <View style={styles2.container}>
-            <Text style={styles2.title}>{item.product.name}</Text>
-            <Text style={styles2.text}>Price: ${item.product.price}</Text>
-            <View style={styles2.quantityContainer}>
-              <IconButton
-                icon="minus"
-                iconColor={"#3d2352"}
-                size={20}
-                onPress={() => decreaseCartItem(item)}
-                mode="contained"
-              />
-              <Text style={styles2.quantity}>{item.quantity}</Text>
-              <IconButton
-                icon="plus"
-                iconColor={"#3d2352"}
-                size={20}
-                onPress={() => updateCartItem(item)}
-                mode="contained"
-              />
+      {items.length > 0 ? (
+        <>
+          {items.map((item) => (
+            <View style={styles.cartItem} key={item.product._id}>
+              <Image
+                style={styles2.image}
+                source={
+                  imageMap[item.product.img] ||
+                  require("../assets/productimg.png")
+                }
+              ></Image>
+              <View style={styles2.container}>
+                <Text style={styles2.title}>{item.product.name}</Text>
+                <Text style={styles2.text}>Price: ${item.product.price}</Text>
+                <View style={styles2.quantityContainer}>
+                  <IconButton
+                    icon="minus"
+                    iconColor={"#3d2352"}
+                    size={20}
+                    onPress={() => decreaseCartItem(item)}
+                    mode="contained"
+                  />
+                  <Text style={styles2.quantity}>{item.quantity}</Text>
+                  <IconButton
+                    icon="plus"
+                    iconColor={"#3d2352"}
+                    size={20}
+                    onPress={() => updateCartItem(item)}
+                    mode="contained"
+                  />
 
-              <IconButton
-                icon="delete-forever"
-                iconColor={"#3d2352"}
-                size={24}
-                onPress={() => deleteCartItem(item)}
-              />
+                  <IconButton
+                    icon="delete-forever"
+                    iconColor={"#3d2352"}
+                    size={24}
+                    onPress={() => deleteCartItem(item)}
+                  />
+                </View>
+              </View>
             </View>
-          </View>
-        </View>
-      ))}
+          ))}
+        </>
+      ) : (
+        <>
+          <Text>Cart empty</Text>
+        </>
+      )}
+
       <Text style={styles2.totalPrice}>
         Total price: ${calculateTotalPrice()}
       </Text>

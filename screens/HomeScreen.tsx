@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     flex: 1,
-    margin: 5,
+    margin: 2,
     maxWidth: "50%",
   },
 });
