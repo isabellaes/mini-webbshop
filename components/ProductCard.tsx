@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet, Image, Pressable } from "react-native";
+import { Text, StyleSheet, Image, Pressable } from "react-native";
 import { Product } from "../utils/types";
 import { Surface } from "react-native-paper";
+import imageMap from "../utils/imgsources";
 
 type Props = {
   product: Product;
@@ -13,7 +14,9 @@ const ProductCard = (props: Props) => {
       <Surface style={styles.container} elevation={4}>
         <Image
           style={styles.image}
-          source={require("../assets/productimg.png")}
+          source={
+            imageMap[props.product.img] || require("../assets/productimg.png")
+          }
         />
         <Text style={styles.title}>{props.product.name}</Text>
         <Text style={styles.text}>${props.product.price}</Text>

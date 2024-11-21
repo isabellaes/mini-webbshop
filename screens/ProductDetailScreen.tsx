@@ -5,6 +5,7 @@ import { Surface } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../store/store";
 import { addItem } from "../store/cartSlice";
+import imageMap from "../utils/imgsources";
 
 type ProductDetailScreenRouteProp = RouteProp<RootStackParamList, "Product">;
 
@@ -14,8 +15,8 @@ type Props = {
 
 const ProductDetailScreen = (props: Props) => {
   const { productId } = props.route.params;
-  const products = useSelector((state: RootState) => state.product.items);
-  const product = products.find((p) => p.id === productId);
+  const products = useSelector((state: RootState) => state.product.products);
+  const product = products.find((p) => p._id === productId);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -28,7 +29,11 @@ const ProductDetailScreen = (props: Props) => {
       <Surface elevation={4} style={styles2.container}>
         <Image
           style={styles2.image}
-          source={require("../assets/productimg.png")}
+          source={
+            product
+              ? imageMap[product.img]
+              : require("../assets/productimg.png")
+          }
         />
         <Text style={styles2.title}>{product?.name}</Text>
         <Text style={styles2.text}>{product?.description}</Text>

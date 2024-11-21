@@ -3,8 +3,11 @@ import ProductCard from "../components/ProductCard";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/RootNavigator";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../store/store";
+import { useEffect, useState } from "react";
+import { fetchProducts } from "../store/productSlice";
+import { Product } from "../utils/types";
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -12,20 +15,31 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<
 >;
 
 const HomeScreen = () => {
+  const [products, setProducts] = useState<Product[]>([]);
   const navigation = useNavigation<HomeScreenNavigationProp>();
-  const products = useSelector((state: RootState) => state.product.items);
+  const data = useSelector((state: RootState) => state.product.products);
+
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setProducts(data);
+    console.log(data);
+  }, [data]);
 
   return (
     <View style={styles.container}>
       <FlatList
         data={products}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
           <View style={styles.cardContainer}>
             <ProductCard
               product={item}
               onPress={() => {
-                navigation.navigate("Product", { productId: item.id });
+                navigation.navigate("Product", { productId: item._id });
               }}
             />
           </View>

@@ -12,6 +12,7 @@ import {
   clearCart,
 } from "../store/cartSlice";
 import { IconButton } from "react-native-paper";
+import imageMap from "../utils/imgsources";
 
 type CartScreenRouteProp = RouteProp<RootStackParamList, "Cart">;
 
@@ -26,15 +27,15 @@ const CartScreen = (props: Props) => {
   const dispatch = useDispatch<AppDispatch>();
 
   function updateCartItem(item: CartItem) {
-    dispatch(increaseQuantity({ productId: item.product.id }));
+    dispatch(increaseQuantity({ productId: item.product._id }));
   }
 
   function deleteCartItem(item: CartItem) {
-    dispatch(removeItem({ productId: item.product.id }));
+    dispatch(removeItem({ productId: item.product._id }));
   }
 
   function decreaseCartItem(item: CartItem) {
-    dispatch(decreaseQuantity({ productId: item.product.id }));
+    dispatch(decreaseQuantity({ productId: item.product._id }));
   }
 
   function calculateTotalPrice(): number {
@@ -49,10 +50,12 @@ const CartScreen = (props: Props) => {
   return (
     <View style={styles.container}>
       {items.map((item) => (
-        <View style={styles.cartItem} key={item.product.id}>
+        <View style={styles.cartItem} key={item.product._id}>
           <Image
             style={styles2.image}
-            source={require("../assets/productimg.png")}
+            source={
+              imageMap[item.product.img] || require("../assets/productimg.png")
+            }
           ></Image>
           <View style={styles2.container}>
             <Text style={styles2.title}>{item.product.name}</Text>
